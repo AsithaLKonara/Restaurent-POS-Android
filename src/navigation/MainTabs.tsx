@@ -5,6 +5,7 @@ import { MenuScreen } from '../screens/MenuScreen';
 import { BillingScreen } from '../screens/BillingScreen';
 import { HistoryScreen } from '../screens/HistoryScreen';
 import { PrinterSetupScreen } from '../screens/PrinterSetupScreen';
+import { DashboardScreen } from '../screens/DashboardScreen';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -21,7 +22,8 @@ export const MainTabs = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = 'help';
-          if (route.name === 'Billing') iconName = 'cash-register';
+          if (route.name === 'Dashboard') iconName = 'view-dashboard';
+          else if (route.name === 'Billing') iconName = 'cash-register';
           else if (route.name === 'Menu') iconName = 'food';
           else if (route.name === 'History') iconName = 'history';
           else if (route.name === 'Settings') iconName = 'cog';
@@ -35,6 +37,7 @@ export const MainTabs = () => {
         tabBarStyle: { backgroundColor: theme.colors.background },
       })}
     >
+      <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Billing" component={BillingScreen} />
       <Tab.Screen name="Menu" component={MenuScreen} />
       <Tab.Screen name="History" component={HistoryScreen} />
