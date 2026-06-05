@@ -5,16 +5,10 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { useAuthStore } from '../store/authStore';
 import { View, ActivityIndicator } from 'react-native';
 
-const Stack = createNativeStackNavigator();
+import { MainTabs } from './MainTabs';
+import { AddEditMenuItemScreen } from '../screens/AddEditMenuItemScreen';
 
-// Placeholder for Main Screen
-const MainScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
-};
+const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
   const { isAuthenticated, isChecking, checkAuthStatus } = useAuthStore();
@@ -37,7 +31,14 @@ export const AppNavigator = () => {
         {!isAuthenticated ? (
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
-          <Stack.Screen name="Main" component={MainScreen} />
+          <>
+            <Stack.Screen name="MainTabs" component={MainTabs} />
+            <Stack.Screen 
+              name="AddEditMenuItem" 
+              component={AddEditMenuItemScreen} 
+              options={{ headerShown: true, title: 'Menu Item' }}
+            />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
