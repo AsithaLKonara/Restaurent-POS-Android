@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, TextInput, Button, useTheme, Surface } from 'react-native-paper';
 import { useBillingStore } from '../store/billingStore';
+import { printBill } from '../services/printerService';
 
 export const CheckoutScreen = ({ navigation }: any) => {
   const { subtotal, cashReceived, changeAmount, setCashReceived, saveBill } = useBillingStore();
@@ -19,12 +20,27 @@ export const CheckoutScreen = ({ navigation }: any) => {
 
   const handleCheckout = async () => {
     if (cashReceived < subtotal) return;
+    
+    // Save current cart data for printing before clearCart is called in saveBill
+    const { cart } = useBillingStore.getState();
+    const currentSubtotal = subtotal;
+    const currentCash = cashReceived;
+    const currentChange = changeAmount;
+    
     const billNo = await saveBill();
     if (billNo) {
-      // In a full implementation, we might navigate to a 'Print Receipt' screen
-      // or directly trigger the print function here.
+      // Trigger Printer
+      await printBill({
+        billNo,
+        date: new Date().toLocaleString(),
+        items: cart,
+        subtotal: currentSubtotal,
+        cash: currentCash,
+        change: currentChange,
+        restaurantName: 'OfflinePOS Lite'
+      });
+      
       navigation.navigate('MainTabs', { screen: 'Billing' });
-      // TODO: Trigger Printer
     }
   };
 
