@@ -7,6 +7,7 @@ import { View, ActivityIndicator } from 'react-native';
 
 import { MainTabs } from './MainTabs';
 import { AddEditMenuItemScreen } from '../screens/AddEditMenuItemScreen';
+import { CheckoutScreen } from '../screens/CheckoutScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,11 @@ export const AppNavigator = () => {
               name="AddEditMenuItem" 
               component={AddEditMenuItemScreen} 
               options={{ headerShown: true, title: 'Menu Item' }}
+            />
+            <Stack.Screen 
+              name="Checkout" 
+              component={CheckoutScreen} 
+              options={{ headerShown: true, title: 'Checkout' }}
             />
           </>
         )}

@@ -2,13 +2,13 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
 import { MenuScreen } from '../screens/MenuScreen';
+import { BillingScreen } from '../screens/BillingScreen';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
 // Placeholders for other screens
-const BillingScreenPlaceholder = () => <View style={{flex:1, justifyContent:'center', alignItems:'center'}}><Text>Billing Core</Text></View>;
 const HistoryScreenPlaceholder = () => <View style={{flex:1, justifyContent:'center', alignItems:'center'}}><Text>History</Text></View>;
 const SettingsScreenPlaceholder = () => <View style={{flex:1, justifyContent:'center', alignItems:'center'}}><Text>Settings</Text></View>;
 
@@ -34,7 +34,7 @@ export const MainTabs = () => {
         tabBarStyle: { backgroundColor: theme.colors.background },
       })}
     >
-      <Tab.Screen name="Billing" component={BillingScreenPlaceholder} />
+      <Tab.Screen name="Billing" component={BillingScreen} />
       <Tab.Screen name="Menu" component={MenuScreen} />
       <Tab.Screen name="History" component={HistoryScreenPlaceholder} />
       <Tab.Screen name="Settings" component={SettingsScreenPlaceholder} />
